@@ -1,52 +1,107 @@
-# Loan Approval Prediction Using Machine Learning
+# Personal Loan Acceptance Prediction Using Machine Learning
 
 ## Project Overview
-This project focuses on detecting fraudulent activities using machine learning techniques. The primary objective is to build a predictive model that accurately identifies potential fraud cases based on various financial and transactional attributes.
+This project uses machine learning to predict which bank customers are likely to accept personal loan offers. The goal is to optimize marketing campaigns by targeting customers with the highest probability of acceptance, thereby improving conversion rates and reducing marketing costs.
+## Problem Statement
+Banks offer personal loans to their existing customers, but acceptance rates are typically low (9.7% in this dataset). By accurately predicting which customers will accept loan offers, banks can:
+-Focus marketing efforts on high-probability customers
+-Reduce wasted marketing spend
+-Improve customer experience by sending relevant offers only
+-Increase overall loan portfolio growth
 
 ## Target Variable
-The target variable in this project is **Personal Loan**, which indicates whether a loan application is fraudulent or legitimate. The model is trained to distinguish between normal loan approvals and those with suspicious characteristics that may suggest fraudulent intent.
+**Personal Loan** - Binary classification indicating whether a customer accepted (1) or declined (0) a personal loan offer.
 
-## Dataset
-The dataset contains various features related to personal loans, including customer demographics, financial history, and loan-related attributes. These features serve as predictors to determine the likelihood of fraud.
+## Dataset Features
+The dataset contains 4,948 customer records with the following attributes:
+-Demographics: Age, Experience, Family size, ZIP code
+-Financial Data: Income, Mortgage amount
+-Banking Behavior: Credit card average spending (CCAvg), Securities account, CD account
+-Service Usage: Online banking, Credit card ownership
+-Education Level: Categorical variable (1, 2, 3)
+
+## Key Challenge: Severe class imbalance - only 9.7% of customers accepted loan offers.
 
 ## Methodology
-The following steps are undertaken in this project:
-1. **Data Preprocessing**: Cleaning and transforming the dataset, handling missing values, and encoding categorical variables.
-2. **Exploratory Data Analysis (EDA)**: Analyzing patterns, correlations, and distributions to understand key insights.
-3. **Feature Engineering**: Selecting and creating relevant features to enhance model performance.
-4. **Model Selection**: Implementing various machine learning algorithms such as Logistic Regression, Decision Trees, Random Forest, and Gradient Boosting models.
-5. **Model Evaluation**: Assessing model performance using accuracy, precision, recall, F1-score, and AUC-ROC metrics.
-6. **Hyperparameter Tuning**: Optimizing model parameters to improve accuracy and generalization.
-7. **Deployment Considerations**: Preparing the model for real-world usage with proper validation and monitoring mechanisms.
+**1. Data Preprocessing**
+-Removed records with negative experience values
+-Converted credit card spending from monthly to annual (multiplied by 12)
+-Standardized column names
+-Converted appropriate features to categorical/boolean types
+
+**2. Handling Class Imbalance**
+-Applied SMOTETomek (hybrid oversampling + undersampling)
+-Resampled distribution: 67% negative class, 33% positive class
+-Split: 60% train, 20% validation, 20% test
+
+**3. Model Development**
+Implemented and compared three models:
+-Logistic Regression (baseline)
+-Random Forest (ensemble method)
+-XGBoost (gradient boosting)
+
+**4. Hyperparameter Tuning**
+-Used RandomizedSearchCV with 5-fold cross-validation on XGBoost
+-Optimized parameters: n_estimators, max_depth, learning_rate, subsample, colsample_bytree, gamma
+
+**5. Model Evaluation**
+Metrics used: Accuracy, Precision, Recall, F1-score, Confusion Matrix
+
+Results
+| Model | Test Accuracy | Precision (Has Loan) | Recall (Has Loan) | F1-Score (Has Loan) |
+|-------|--------------|---------------------|------------------|---------------------|
+| Logistic Regression | 89.70% | 85.89% | 79.86% | 82.77% |
+| Random Forest | 97.89% | 97.71% | 96.61% | 97.16% |
+| XGBoost (baseline) | 97.97% | 97.94% | 96.61% | 97.27% |
+| **XGBoost (tuned)** | **99.16%** | **98.62%** | **98.85%** | **98.74%** |
+
+## Final Model Performance
+Test Accuracy: 99.16%
+False Positives: 6 (predicted acceptance but declined)
+False Negatives: 4 (predicted decline but accepted)
+Total Test Cases: 1,318
+
+## Feature Importance
+Top predictive features identified by XGBoost:
+-Income
+-Education level
+-Credit card average spending (CCAvg)
+-Family size
+-CD account ownership
 
 ## Dependencies
-Ensure the following Python libraries are installed before running the project:
-- NumPy
-- Pandas
-- Scikit-learn
-- Matplotlib
-- Seaborn
+pip install numpy pandas scikit-learn xgboost imbalanced-learn matplotlib seaborn
+**Required libraries:**
+NumPy
+Pandas
+Scikit-learn
+XGBoost
+imbalanced-learn
+Matplotlib
+Seaborn
 
 ## Running the Project
-1. Load the dataset and preprocess the data.
-2. Perform EDA to gain insights into fraudulent patterns.
-3. Train machine learning models and evaluate their performance.
-4. Select the best-performing model and fine-tune hyperparameters.
-5. Save and deploy the trained model.
+-Clone the repository and install dependencies
+-Load the dataset (Bank.csv)
+-Run the preprocessing pipeline
+-Train models and evaluate performance
+-Use the final XGBoost model for predictions
 
-## Expected Outcomes
-- A robust fraud detection model that can flag potentially fraudulent personal loan applications.
-- Improved decision-making for financial institutions in identifying and mitigating fraud risks.
+## Business Impact
+-99.16% accuracy enables confident customer targeting
+-Reduces wasted marketing efforts by ~90%
+-Improves customer satisfaction through relevant offers
+-Increases loan portfolio growth through optimized conversions
 
 ## Future Improvements
-- Incorporating additional financial variables to enhance model accuracy.
-- Exploring deep learning techniques for improved fraud detection.
-- Implementing real-time fraud detection using streaming data.
+-Implement real-time prediction API for integration with CRM systems
+-Add model monitoring and retraining pipeline for production deployment
+-Explore deep learning approaches (neural networks)
+-Incorporate additional behavioral features (transaction history, product usage)
+-Develop customer segmentation for personalized loan offers
 
 ## Author
 Esther Osikoya
 
----
-This README provides a structured overview of the project. Let me know if you'd like any modifications!
 
 
