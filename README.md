@@ -93,12 +93,7 @@ Seaborn
 -Improves customer satisfaction through relevant offers
 -Increases loan portfolio growth through optimized conversions
 
-## Future Improvements
--Implement real-time prediction API for integration with CRM systems
--Add model monitoring and retraining pipeline for production deployment
--Explore deep learning approaches (neural networks)
--Incorporate additional behavioral features (transaction history, product usage)
--Develop customer segmentation for personalized loan offers
+
 
 ## Author
 Esther Osikoya
