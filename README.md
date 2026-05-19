@@ -95,6 +95,21 @@ Seaborn
 
 
 
+## Repository Structure
+
+```
+Loan-Prediction-API/
+├── app.py              # API entrypoint
+├── Dockerfile
+├── requirements.txt
+├── README.md
+├── src/                # Source scripts (training, prediction, utilities)
+├── notebooks/          # Jupyter notebooks for exploration
+├── models/             # Trained model files (.pkl, etc.)
+├── data/               # Datasets
+└── images/             # Screenshots and other images
+```
+
 ## Author
 Esther Osikoya
 
