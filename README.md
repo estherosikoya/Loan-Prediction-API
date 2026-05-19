@@ -94,6 +94,8 @@ Seaborn
 -Increases loan portfolio growth through optimized conversions
 
 
+Built and deployed a REST API using Flask that serves the trained XGBoost model in real time. The API accepts customer data as JSON input and returns an instant loan acceptance prediction.
+
 
 ## Repository Structure
 
