@@ -72,7 +72,3 @@ if __name__ == "__main__":
     # Output the predictions
     print("Predictions:")
     print(predictions)
-
-
-
-   
