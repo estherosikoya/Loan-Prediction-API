@@ -8,6 +8,7 @@ from imblearn.combine import SMOTETomek
 import joblib
 import os
 import logging
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -74,15 +75,16 @@ def train_and_save_model(X, y, model_path):
     logging.info(classification_report(y_val, y_val_pred))
     
     # Save the model, scaler, and training columns
-    joblib.dump(xgb_model, "final_xgb_model.pkl")  # Save the model with the correct name
-    joblib.dump(scaler, "scaler.pkl")
-    joblib.dump(X.columns.tolist(), "training_columns.pkl")  # Save training columns
+    joblib.dump(xgb_model, os.path.join(model_path, "final_xgb_model.pkl"))  # Save the model with the correct name
+    joblib.dump(scaler, os.path.join(model_path, "scaler.pkl"))
+    joblib.dump(X.columns.tolist(), os.path.join(model_path, "training_columns.pkl"))  # Save training columns
     logging.info("Model, scaler, and training columns saved successfully!")
 
 if __name__ == "__main__":
     # File paths
-    data_file = "/Users/utente/Downloads/Bank.csv"  # Replace with your dataset path
-    model_output_path = "model"  # Replace with your desired model output directory
+    project_root = Path(__file__).resolve().parents[1]
+    data_file = str(project_root / "data" / "Bank.csv")
+    model_output_path = str(project_root / "models")
     
     # Load and preprocess data
     logging.info("Loading and preprocessing data...")
