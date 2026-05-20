@@ -1,16 +1,16 @@
 import pandas as pd
 import joblib
-import os
 from pathlib import Path
 
 # Load the saved model, scaler, and training columns
 def load_model_and_scaler(model_path):
-    if not os.path.exists(model_path):
+    model_dir = Path(model_path)
+    if not model_dir.exists():
         raise FileNotFoundError(f"The directory '{model_path}' does not exist. Please provide a valid path.")
     
-    model = joblib.load(f"{model_path}/final_xgb_model.pkl")
-    scaler = joblib.load(f"{model_path}/scaler.pkl")
-    training_columns = joblib.load(f"{model_path}/training_columns.pkl")
+    model = joblib.load(model_dir / "final_xgb_model.pkl")
+    scaler = joblib.load(model_dir / "scaler.pkl")
+    training_columns = joblib.load(model_dir / "training_columns.pkl")
     return model, scaler, training_columns
 
 # Preprocess the input data

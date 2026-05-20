@@ -143,7 +143,6 @@ Loan-Prediction-API/
 
 ## Author
 Esther Osikoya
-- LinkedIn: linkedin.com/in/esther-osikoya-6a0868182
-- GitHub: github.com/estherosikoya
-
+- LinkedIn: https://linkedin.com/in/esther-osikoya-6a0868182
+- GitHub: https://github.com/estherosikoya
 

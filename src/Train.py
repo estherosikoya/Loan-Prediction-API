@@ -75,7 +75,7 @@ def train_and_save_model(X, y, model_path):
     logging.info(classification_report(y_val, y_val_pred))
     
     # Save the model, scaler, and training columns
-    joblib.dump(xgb_model, os.path.join(model_path, "final_xgb_model.pkl"))  # Save the model with the correct name
+    joblib.dump(xgb_model, os.path.join(model_path, "final_xgb_model.pkl"))  # Keep filename aligned with app and prediction scripts
     joblib.dump(scaler, os.path.join(model_path, "scaler.pkl"))
     joblib.dump(X.columns.tolist(), os.path.join(model_path, "training_columns.pkl"))  # Save training columns
     logging.info("Model, scaler, and training columns saved successfully!")
