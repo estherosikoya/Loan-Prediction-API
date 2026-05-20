@@ -1,15 +1,16 @@
 import pandas as pd
 import joblib
-import os
+from pathlib import Path
 
 # Load the saved model, scaler, and training columns
 def load_model_and_scaler(model_path):
-    if not os.path.exists(model_path):
+    model_dir = Path(model_path)
+    if not model_dir.exists():
         raise FileNotFoundError(f"The directory '{model_path}' does not exist. Please provide a valid path.")
     
-    model = joblib.load(f"{model_path}/xgb_model.pkl")
-    scaler = joblib.load(f"{model_path}/scaler.pkl")
-    training_columns = joblib.load(f"{model_path}/training_columns.pkl")
+    model = joblib.load(model_dir / "final_xgb_model.pkl")
+    scaler = joblib.load(model_dir / "scaler.pkl")
+    training_columns = joblib.load(model_dir / "training_columns.pkl")
     return model, scaler, training_columns
 
 # Preprocess the input data
@@ -52,8 +53,9 @@ def make_predictions(input_data, model, scaler, training_columns):
 
 if __name__ == "__main__":
     # File paths
-    model_path = "model"  # Path to the saved model and scaler
-    input_file = "/Users/utente/Downloads/ML_PRJ2/new_data.csv"  # Path to your input data file
+    project_root = Path(__file__).resolve().parents[1]
+    model_path = str(project_root / "models")
+    input_file = str(project_root / "data" / "new_data.csv")
     
     # Load the model, scaler, and training columns
     print("Loading model, scaler, and training columns...")
@@ -70,7 +72,3 @@ if __name__ == "__main__":
     # Output the predictions
     print("Predictions:")
     print(predictions)
-
-
-
-   

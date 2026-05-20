@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
+from pathlib import Path
 
 # Load the saved model, scaler, and training columns
-model = joblib.load("final_xgb_model.pkl")
-scaler = joblib.load("scaler.pkl")
-training_columns = joblib.load("training_columns.pkl")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+MODEL_DIR = PROJECT_ROOT / "models"
+model = joblib.load(MODEL_DIR / "final_xgb_model.pkl")
+scaler = joblib.load(MODEL_DIR / "scaler.pkl")
+training_columns = joblib.load(MODEL_DIR / "training_columns.pkl")
 
 # Initialize Flask app
 app = Flask(__name__)
