@@ -124,13 +124,13 @@ pip install numpy pandas scikit-learn xgboost imbalanced-learn matplotlib seabor
 - Place Bank.csv in the `data/` folder
 - Run the notebook in `notebooks/` for full analysis
 - Run `src/Train.py` to retrain the model
-- Run `app.py` to start the Flask API
+- Run `src/app.py` to start the Flask API
 
 ## Repository Structure
 
 ```
 Loan-Prediction-API/
-├── app.py              # API entrypoint
+├── src/app.py          # API entrypoint
 ├── Dockerfile
 ├── requirements.txt
 ├── README.md
@@ -145,6 +145,5 @@ Loan-Prediction-API/
 Esther Osikoya
 - LinkedIn: linkedin.com/in/esther-osikoya-6a0868182
 - GitHub: github.com/estherosikoya
-
 
 

@@ -1,24 +1,25 @@
 
 # %%
-    income – Unusual income levels compared to financial activity can indicate fraud (e.g., low income but large transactions).
-    ccavg (Credit Card Average Spending) – Extremely high or erratic spending might indicate fraudulent transactions.
-    personal_loan – Fraudsters may take loans they don’t intend to repay.
-    securities_account – If someone with low income has a securities account with large investments, it might be suspicious.
-    cd_account (Certificate of Deposit Account) – Could indicate laundering activity if inconsistent with income.
-    online – Online banking fraud is common, so knowing whether a person transacts online is crucial.
-    creditcard – If a person has multiple bank-issued credit cards with unusual spending, that could be suspicious.
+# income – Unusual income levels compared to financial activity can indicate fraud (e.g., low income but large transactions).
+# ccavg (Credit Card Average Spending) – Extremely high or erratic spending might indicate fraudulent transactions.
+# personal_loan – Fraudsters may take loans they don’t intend to repay.
+# securities_account – If someone with low income has a securities account with large investments, it might be suspicious.
+# cd_account (Certificate of Deposit Account) – Could indicate laundering activity if inconsistent with income.
+# online – Online banking fraud is common, so knowing whether a person transacts online is crucial.
+# creditcard – If a person has multiple bank-issued credit cards with unusual spending, that could be suspicious.
 
 # %%
 import pandas as pd
 import os
+from pathlib import Path
 os.getcwd()
-os.chdir('/Users/utente/downloads')
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 # %% [markdown]
 # ## Data Preparation
 
 # %%
-df = pd.read_csv('Bank.csv')
+df = pd.read_csv(PROJECT_ROOT / 'data' / 'Bank.csv')
 df.describe()
 
 
@@ -447,10 +448,6 @@ plt.ylabel("True Label")
 plt.title("Confusion Matrix for XGBoost Fraud Detection Model")
 plt.show()
 
-'''# Display classification report
-import ace_tools as tools
-tools.display_dataframe_to_user(name="XGBoost Classification Report", dataframe=classification_df)'''
-
 # Display false positive & false negative summary
 fp_fn_summary = pd.DataFrame({
     "Metric": ["False Positives (Legit transactions flagged as fraud)", "False Negatives (Fraudulent transactions missed)"],
@@ -508,12 +505,3 @@ print(f"Accuracy: {accuracy}")
 # Detailed classification report
 report = classification_report(y_test.astype(int), y_test_pred_xgb)
 print(report)
-
-
-# %%
-
-
-# %%
-
-
-
