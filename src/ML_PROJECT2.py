@@ -84,10 +84,11 @@ df.head(5)
 df.columns = df.columns.str.lower().str.replace(' ', '_')
 
 # %%
-df['ccavg']=df['ccavg'].str.replace("/",".")
+if df['ccavg'].dtype == 'object':
+    df['ccavg'] = df['ccavg'].str.replace("/", ".")
 
 # per month converted to per year
-df['ccavg']=df['ccavg'].astype(float)*12
+df['ccavg'] = df['ccavg'].astype(float) * 12
 df
 
 # %%
